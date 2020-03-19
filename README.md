@@ -1,6 +1,6 @@
 # DEMO
 
-![image](https://github.com/Cheng-Yi-Ting/ETSearch/blob/master/demo-images/操作影片.gif)
+![image](https://github.com/Cheng-Yi-Ting/ETSearch/blob/master/demo-images/系統操作影片.gif)
 
 ## 說明
 
