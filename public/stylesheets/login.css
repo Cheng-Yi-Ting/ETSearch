@@ -1,0 +1,149 @@
+/* 背景圖片 */
+
+.nav {
+    margin-bottom: 10px;
+}
+
+.login-wrap {
+    width: 100%;
+    /* 水平居中頁面 */
+    margin: auto;
+    /* 使用 max-width 替代 width 可以更完美的處理當瀏覽器視窗小於元素寬度的情況 ，設定最大寬度限制。*/
+    max-width: 525px;
+    min-height: 630px;
+    position: relative;
+    background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+}
+
+
+/* 註冊/登入圖層 */
+
+
+/* box-sizing的設定值 content-box：預設值，實際寬高＝所設定的數值＋border＋padding border-box：實際寬高＝所設定的數值(已包含border和padding) */
+
+.login-html {
+    width: 100%;
+    height: 100%;
+    /* max-width: 525px;
+    min-height: 670px; */
+    box-sizing: border-box;
+    position: absolute;
+    padding: 90px 70px 5px 70px;
+    background: rgba(40, 57, 101, .9);
+    /* overflow: hidden; */
+}
+
+
+/* SIGN UP/SIGN IN  */
+
+.login-form .sign-in-htm,
+.login-form .sign-up-htm {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    /* 隐藏被旋转的 div 元素的背面： */
+    /* border: 2px solid; */
+}
+
+
+/* 隱藏radio元件的圓圈 */
+
+
+/* .login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check {
+    display: none;
+} */
+
+
+/*字母大寫  */
+
+.login-html .tab,
+.login-form .group .button {
+    text-transform: uppercase;
+}
+
+
+/* SIGN IN和SIGN UP*/
+
+.login-html .tab {
+    font-size: 22px;
+    /* margin-right: 15px; */
+    color: white;
+    padding-bottom: 5px;
+    margin: 0 15px 10px 0;
+    display: inline-block;
+    /*未點擊的底線為透明 */
+    border-bottom: 2px solid transparent;
+}
+
+
+/* SIGN IN/SIGN UP表單 */
+
+.login-form {
+    min-height: 345px;
+    position: relative;
+    /* border: 2px solid; */
+}
+
+
+/* 每個input group 的margin */
+
+.login-form .group {
+    margin-bottom: 15px;
+}
+
+
+/* 欄位樣式 */
+
+.login-form .group .input,
+.login-form .group .button {
+    width: 100%;
+    color: #fff;
+    display: block;
+    /* border: 2px solid greenyellow; */
+    /* box-sizing: border-box */
+}
+
+
+/* input&button樣式 */
+
+.login-form .group .input,
+.login-form .group .button {
+    border: none;
+    padding: 15px 20px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, .1);
+    /* border: 2px solid; */
+    /* box-sizing: border-box; */
+}
+
+.login-form .group .button:hover {
+    /* width: 100%; */
+    /* margin-bottom: 10px; */
+    background: rgba(0, 0, 0, 0.3);
+    /* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); */
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
+    /* border-radius: 4px; */
+    /* box-shadow: inset  -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+    transition: box-shadow .5s ease; */
+}
+
+.hr {
+    height: 2px;
+    margin: 60px 0 50px 0;
+    background: rgba(255, 255, 255, .2);
+}
+
+.foot-lnk {
+    text-align: center;
+}
+
+.fa-user,
+.fa-user-plus {
+    color: white;
+    font-size: 25px;
+}

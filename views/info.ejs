@@ -1,0 +1,148 @@
+<div class="news_position">
+    <div class="container-fluid">
+        <div class="row">
+
+            <modal v-if="showModal" @close="showModal = false">
+                <!-- you can use custom content here to overwrite  default content  -->
+                <h3 slot="header">{{NewsTitle}}</h3>
+                <h3 slot="body">{{NewsContent}}</h3>
+                <span v-for="keyword in NewsKeywords" slot="keywords">{{keyword}}</span>
+                <span v-for="(group_news,id) in group_searchResults" slot="group_news"
+                    @click="show_modal(group_news,id)">{{group_news.title}}<br>{{group_news.description}}
+                    <hr /></span>
+                <!-- <span slot="keywords">{{NewsKeywords[1]}}</span> -->
+                <div slot="rating" :class="{ hide_rating_area: hide_rating==1}">
+
+                    <!-- 用null來隱藏stars_avg元素，用stars_avg class來顯示星用-->
+                    <div>
+                        <span :class="{ stars_avg: stars_avg_Active==1}"><b>{{stars_avg }}</b></span>
+
+                        <span :class="{ re_stars: re_stars_Active==1}" @click="stars_empty"></span>
+                    </div>
+                    <!-- <div class="stars_avg"><b>{{stars_avg }}</b></div> -->
+
+
+                    <!-- <div class="title">
+                                                            <h1>stars<span>.css</span></h1>
+                                                        </div> -->
+
+                    <span>可信程度</span>
+                    <div class='star_position'>
+                        <div class="stars">
+                            <form action="">
+                                <input class="star star_1-5" id="star_1-5" type="radio" name="star_1" v-model="stars_1"
+                                    @click="stars_checked" value="5" />
+                                <label class="star star_1-5" for="star_1-5" data-value="5"></label>
+
+                                <input class="star star_1-4" id="star_1-4" type="radio" name="star_1" v-model="stars_1"
+                                    @click="stars_checked" value="4" />
+                                <label class="star star_1-4" for="star_1-4" data-value="4"></label>
+                                <input class="star star_1-3" id="star_1-3" type="radio" name="star_1" v-model="stars_1"
+                                    @click="stars_checked" value="3" />
+                                <label class="star star_1-3" for="star_1-3" data-value="3"></label>
+                                <input class="star star_1-2" id="star_1-2" type="radio" name="star_1" v-model="stars_1"
+                                    @click="stars_checked" value="2" />
+                                <label class="star star_1-2" for="star_1-2" data-value="2"></label>
+                                <input class="star star_1-1" id="star_1-1" type="radio" name="star_1" v-model="stars_1"
+                                    @click="stars_checked" value="1" />
+                                <label class="star star_1-1" for="star_1-1" data-value="1"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <span>興趣程度</span>
+                        <div class='star_position'>
+                            <div class="stars">
+                                <form action="">
+                                    <input class="star star_2-5" id="star_2-5" type="radio" name="star_2"
+                                        @click="stars_checked" v-model="stars_2" value="5" />
+                                    <label class="star star_2-5" for="star_2-5" data-value="5"></label>
+                                    <input class="star star_2-4" id="star_2-4" type="radio" name="star_2"
+                                        @click="stars_checked" v-model="stars_2" value="4" />
+                                    <label class="star star_2-4" for="star_2-4" data-value="4"></label>
+                                    <input class="star star_2-3" id="star_2-3" type="radio" name="star_2"
+                                        @click="stars_checked" v-model="stars_2" value="3" />
+                                    <label class="star star_2-3" for="star_2-3" data-value="3"></label>
+                                    <input class="star star_2-2" id="star_2-2" type="radio" name="star_2"
+                                        @click="stars_checked" v-model="stars_2" value="2" />
+                                    <label class="star star_2-2" for="star_2-2" data-value="2"></label>
+                                    <input class="star star_2-1" id="star_2-1" type="radio" name="star_2"
+                                        @click="stars_checked"  v-model="stars_2" value="1" />
+                                    <label class="star star_2-1" for="star_2-1" data-value="1"></label>
+                                    </from>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span>關鍵字詞</span>
+                        <div class='star_position'>
+                            <div class="stars">
+                                <form action="">
+                                    <input class="star star_3-5" id="star_3-5" type="radio" name="star_3"
+                                        @click="stars_checked" v-model="stars_3" value="5" />
+                                    <label class="star star_3-5" for="star_3-5" data-value="5"></label>
+                                    <input class="star star_3-4" id="star_3-4" type="radio" name="star_3"
+                                        @click="stars_checked" v-model="stars_3" value="4" />
+                                    <label class="star star_3-4" for="star_3-4" data-value="4"></label>
+                                    <input class="star star_3-3" id="star_3-3" type="radio" name="star_3"
+                                        @click="stars_checked" v-model="stars_3" value="3" />
+                                    <label class="star star_3-3" for="star_3-3" data-value="3"></label>
+                                    <input class="star star_3-2" id="star_3-2" type="radio" name="star_3"
+                                        @click="stars_checked" v-model="stars_3" value="2" />
+                                    <label class="star star_3-2" for="star_3-2" data-value="2"></label>
+                                    <input class="star star_3-1" id="star_3-1" type="radio" name="star_3"
+                                        @click="stars_checked" v-model="stars_3" value="1" />
+                                    <label class="star star_3-1" for="star_3-1" data-value="1"></label>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr />
+                    <!-- <p>click the stars</p> -->
+                </div>
+
+            </modal>
+            <div class="col-sm-12 col_news">
+                <hr />
+                <div class="row newsBottom">
+                    <div class="col-sm-12 col_new " v-for="(news,id) in user_searchResults" v-if="news"
+                        @click="show_modal(news,id)">
+                        <div class="user_news_container">
+                            <div class="cover" v-bind:style="user_bg_css(id)">
+
+
+
+                            </div>
+
+                            <div class="info">
+                                <div>
+                                    <div class='score'>{{news.score}}</div>
+                                    <div class='cat'>{{news.category}}</div>
+                                    <!-- <i class="fab fa-canadian-maple-leaf"></i> -->
+                                    <!-- <div class='score'>{{news.score}}</div> -->
+                                    <div class='date'>{{news.date}}</div>
+                                    <a class="fas fa-fire" v-bind:href="news.url" target="_blank"
+                                        @click=url_closeModal=0></a>
+                                </div>
+                                <div class='title'>{{news.title}}</div>
+
+                                <div class='description'>{{news.description}}</div>
+
+                            </div>
+
+                        </div>
+                        <hr />
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+</div>

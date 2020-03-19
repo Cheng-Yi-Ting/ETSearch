@@ -1,0 +1,815 @@
+.cursor_pointer {
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.news_position {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow-y: scroll;
+    /* border: 2px solid; */
+}
+
+.col_news {
+    height: 100vh;
+    /* overflow-y: scroll; */
+    padding-bottom: 50px;
+}
+
+.col-news {
+    padding: 20px;
+}
+
+.news_container {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin-bottom: 30px;
+    /* border: 2px solid; */
+}
+
+.news_container:hover .cover {
+    background-size: 110% 110%;
+    /* background-size: 110% auto; */
+}
+
+.news_container .cover {
+    height: 180px;
+    position: relative;
+    background-size: 100% 100%;
+    /* background-size: 100% auto; */
+    background-position: center center;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+
+/* link icon style ，default display none*/
+
+.news_container .cover a.fas.fa-link {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgb(220, 220, 220);
+    cursor: pointer;
+    -webkit-transition: 0.5s;
+    transition: 0.25s;
+    display: none;
+}
+
+
+/* hover影像的時候顯示link圖示，移入父元素，顯示子元素 */
+
+.news_container .cover:hover a.fas.fa-link {
+    display: block;
+}
+
+
+/* image link hover */
+
+.news_container .cover a.fas.fa-link:hover {
+    color: rgb(180, 152, 171);
+    font-size: 110%;
+    text-decoration: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.news_container .cover h3 {
+    position: absolute;
+    bottom: 10px;
+    font-size: 20px;
+    padding: 5px 15px;
+    background-color: #fff;
+}
+
+.news_container .info {
+    padding: 10px;
+    height: 190px;
+    position: relative;
+    /* margin-bottom: 10px; */
+    /* background: rgb(0, 0, 0); */
+    color: rgb(104, 104, 104);
+}
+
+
+/* 新聞類別和日期 */
+
+.sec_info {}
+
+.news_container .score {
+    /* float: left; */
+    background-color: #4CAF50;
+    position: absolute;
+    bottom: 10px;
+    left: 8px;
+    /* Green */
+    border: none;
+    /* text-decoration: none; */
+    display: inline-block;
+    /* border-radius: 25px; */
+    /* border: none; */
+    color: rgb(245, 245, 245);
+    text-align: center;
+    /* margin-top: 1000px; */
+    /* cursor: pointer; */
+    padding: 4px;
+    font-family: Microsoft JhengHei;
+    font-weight: bold;
+    font-size: 13px;
+    /* box-sizing: border-box; */
+}
+
+.news_container .cat {
+    background-color: rgb(70, 117, 206);
+    position: absolute;
+    bottom: 10px;
+    right: 47.5%;
+    /* Green */
+    border: none;
+    /* text-decoration: none; */
+    display: inline-block;
+    /* border-radius: 25px; */
+    /* border: none; */
+    color: rgb(245, 245, 245);
+    text-align: center;
+    /* margin-top: 1000px; */
+    /* cursor: pointer; */
+    padding: 4px;
+    font-weight: bold;
+    font-size: 13px;
+    /* box-sizing: border-box; */
+}
+
+.news_container .date {
+    /* float: left; */
+    background-color: rgb(107, 171, 223);
+    text-decoration: none;
+    position: absolute;
+    bottom: 10px;
+    right: 6px;
+    /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    /* text-decoration: none; */
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-weight: bold;
+    font-size: 13px;
+    /* height: 100px; */
+    /* margin: 10px 0px; */
+}
+
+
+/* 搜尋欄位 */
+
+.mui-panel {
+    background: black;
+}
+
+
+/* 新聞dialog */
+
+
+/* modal遮蔽頁面 */
+
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+}
+
+
+/* 使元素垂直居中 */
+
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-container {
+    width: 80%;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    color: rgb(104, 104, 104);
+    font-family: Helvetica, Arial, sans-serif;
+    overflow: auto;
+    max-height: 90%;
+    font-size: 18px;
+    /* height: 80%; */
+}
+
+.modal_header {
+    position: relative;
+}
+
+.modal_header h3 {
+    /* margin-top: -50px;
+    padding-bottom:0px; */
+    /* margin-bottom:-100px; */
+    color: rgb(88, 88, 88);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.modal-wrapper hr {
+    border: 0;
+    height: 1px;
+    width: 102%;
+    /* background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); */
+    background: linear-gradient(to right, blue, pink);
+}
+
+
+/* .modal_body hr{
+      background: linear-gradient(to top, black, 20%, cyan);
+}
+ */
+
+
+/* 新聞內文 */
+
+.modal_body {
+    /* height:400px; */
+    /* 最大高度，超過就scroll */
+    max-height: 300px;
+    overflow: auto;
+}
+
+.modal_body span {
+    display: inline-block;
+    /* height:80px; */
+    width: 70px;
+    background-color: rgb(104, 104, 104);
+    border-radius: 25px;
+    /* border: none; */
+    color: rgb(245, 245, 245);
+    text-align: center;
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    font-size: 16px;
+    /* margin: 0px 6px;
+    padding-top: 16px;
+    padding-bottom: 16px; */
+    /* cursor: pointer; */
+    /* padding: 0 16px 0 16px; */
+}
+
+
+/* 新聞關鍵字頻率 */
+
+.modal_keywords span {
+    display: inline-block;
+    /* height:80px; */
+    width: 100px;
+    /* max-width: 600px; */
+    background-color: rgb(104, 104, 104);
+    border-radius: 25px;
+    /* border: none; */
+    color: rgb(245, 245, 245);
+    text-align: center;
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    /* font-size: 16px; */
+    margin: 0px 6px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    /* cursor: pointer; */
+    /* padding: 0 16px 0 16px; */
+}
+
+.modal-fre {
+    margin-top: 0;
+}
+
+.modal-fre span {
+    display: inline-block;
+    /* background-color: rgb(169, 169, 169); */
+    /* background-color: rgb(163, 194, 128); */
+    /* border-radius: 25px; */
+    /* border: none; */
+    /* color: rgb(245, 245, 245);
+    text-align: center; */
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    /* font-size: 16px; */
+    /* margin: 0px 6px; */
+    /* cursor: pointer; */
+    /* padding: 16px; */
+}
+
+
+/* 新聞關鍵字標籤 */
+
+#modal-keywords {
+    margin-top: 0px;
+}
+
+
+/* group news */
+
+
+/*新聞推薦group  */
+
+.modal_group span:hover {
+    color: rgb(70, 130, 241);
+    font-weight: 540;
+    /* color: rgb(49, 169, 173); */
+    /* background: rgb(255, 255, 255); */
+    /* text-decoration: none; */
+    cursor: pointer;
+}
+
+.modal_group hr {
+    background: linear-gradient(to top, black, 20%, rgb(209, 209, 209));
+}
+
+.modal-close-button {
+    float: right;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #aaaaaa;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    outline: none!important;
+    /*去除籃框*/
+    font-size: 30px;
+    /* text-decoration: none; */
+    padding: 10px 10px;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: #000;
+    /* color: rgb(49, 169, 173); */
+    background: rgb(255, 255, 255);
+    /* text-decoration: none; */
+    cursor: pointer;
+}
+
+.modal-close-button:active {
+    /* text-decoration: none; */
+}
+
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-leave-active {
+    opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+
+/* 分頁 */
+
+.pag {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    /* width:100%; */
+    color: rgb(81, 19, 19);
+    font-size: 20px;
+    /* text-shadow: rgb(255, 255, 255) 0px 0px 10px; */
+}
+
+.fa-angle-left,
+.fa-angle-right {
+    /* padding-bottom:20px; */
+    border: none;
+    background: none;
+    outline: none!important;
+}
+
+.pag_left {
+    /* text-align:center;  */
+    /* width:100%; */
+    /* color:rgb(81, 19, 19); */
+    position: fixed;
+    font-size: 50px;
+    top: 50%;
+    left: 150px;
+}
+
+.pag_right {
+    /* text-align:center;  */
+    /* width:100%; */
+    /* color:rgb(81, 19, 19); */
+    position: fixed;
+    top: 50%;
+    right: 150px;
+    font-size: 50px;
+}
+
+.pag i,
+.pag button {
+    display: inline-block;
+    margin: 2px;
+}
+
+.pag_left i:hover,
+.pag_right i:hover,
+.pag_left button:hover,
+.pag_right button:hover {
+    cursor: pointer;
+    color: rgb(37, 203, 173);
+    /* padding:0 20px; */
+    /* text-decoration:none; */
+    /* color: #aaaaaa; */
+    /* border: none; */
+}
+
+
+/* 底下欄位被覆蓋時 */
+
+.newsBottom {
+    margin-bottom: 120px;
+}
+
+
+/* .container-fluid{
+    margin-bottom:100px;
+} */
+
+
+/* .col_news{
+    margin-bottom:100px;
+} */
+
+
+/* News icon */
+
+.news-icon {
+    /* position: absolute;
+  top: 0px;
+  left: 0px; */
+    /* margin-bottom:30px; */
+    /* background:white; */
+    /* height:100px;
+  width:100px; */
+    color: white;
+    margin-right: 30px;
+    padding-left: 30px;
+    /* padding-right:10px; */
+    padding-top: 10px;
+}
+
+.news-icon:hover {
+    color: rgb(190, 206, 147);
+}
+
+
+/* 側欄選單 */
+
+.main-menu {
+    background: #333;
+    /* border-right:1px solid #e5e5e5; */
+    position: absolute;
+    top: 45px;
+    bottom: 0;
+    /* height:500px; */
+    height: 10000px;
+    left: 0;
+    width: 80px;
+}
+
+
+/* 
+.fa-angle-right {
+    margin-left:10px;
+} */
+
+.cat-button {
+    position: absolute;
+    width: 100%;
+    left: 10%;
+}
+
+.main-menu>ul {
+    /* margin:7px 0; */
+    /* width:100%; */
+}
+
+.main-menu button {
+    /* padding-bottom:20px; */
+    border: none;
+    background: none;
+    outline: none!important;
+}
+
+.main-menu li,
+.main-menu button {
+    /* position:absolute; */
+    display: block;
+    /* width:250px; */
+    /* right:25px; */
+    /* border:2px solid; */
+    position: relative;
+    /* display:table; */
+    /* border-collapse:collapse; */
+    /* border-spacing:0px; */
+    /* color:#999; */
+    color: #c3cbd4;
+    /* font-family: arial; */
+    font-size: 16px;
+    /* padding:0px; */
+    margin-top: 20px;
+    /* text-decoration:none; */
+}
+
+.main-menu li:hover,
+.main-menu button:hover {
+    color: rgb(190, 206, 147);
+    cursor: pointer
+}
+
+
+/* .main-menu .nav-icon {
+position:relative;
+display:table-cell;
+width:60px;
+height:36px;
+text-align:center;
+vertical-align:middle;
+font-size:18px;
+} */
+
+
+/* 類別Highlight */
+
+.clickActive {
+    color: rgb(65, 221, 195)!important;
+    font-weight: bold;
+    transition: font-weight 0.1s ease-in;
+    transition: color 1s ease-in;
+    /* background-color:rgb(224, 167, 217); */
+}
+
+
+/* 類別熱門字詞Highlight */
+
+.pop_clickActive {
+    /* color:rgb(65, 221, 195)!important; */
+    color: rgb(233, 172, 59)!important;
+    font-weight: bold;
+    transition: font-weight 0.1s ease-in;
+    transition: color 1s ease-in;
+    /* background-color:rgb(224, 167, 217); */
+}
+
+
+/* 類別關鍵字 */
+
+.popKeywords {
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    /* width:100%; */
+    /* color: rgb(81, 19, 19); */
+    color: rgb(231, 57, 57);
+    font-size: 20px;
+    /* text-shadow: rgb(255, 255, 255) 0px 0px 10px; */
+    margin-top: 100px;
+}
+
+.popKeywords li,
+.popKeywords button {
+    /* color:rgb(65, 221, 195)!important; */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* align-items:center; */
+    /* color:rgb(228, 209, 209); */
+    /* background:rgb(110, 53, 53); */
+    /* background-color: #6e5840; */
+    background: #333;
+    /* color:#999; */
+    color: #c3cbd4;
+    padding: 14px 12px;
+    font-size: 15px;
+    /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3); */
+    border: none;
+    font-weight: bold;
+    /* background: none; */
+    outline: none!important;
+    /* transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4); */
+}
+
+.popKeywords li:hover,
+.popKeywords button:hover {
+    background: rgb(110, 53, 53);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+
+/* 類別上、下箭頭 */
+
+.fa-chevron-up,
+.fa-chevron-down {
+    /* background-color: rgb(24, 61, 226)!important; */
+    background-color: #ddd!important;
+    color: #333!important;
+}
+
+
+/* 評分 */
+
+.hide_rating_area {
+    display: none;
+}
+
+div.star_position {
+    display: inline-block;
+    position: relative;
+    left: -80px;
+}
+
+div.stars {
+    /* width: 270px; */
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    /* border:2px solid; */
+}
+
+
+/* 隱藏radio button */
+
+input.star {
+    visibility: hidden
+}
+
+label.star {
+    float: right;
+    /* position:relative; */
+    padding: 2px;
+    font-size: 28px;
+    color: #444;
+    transition: all .2s;
+}
+
+
+/* 「~」和「+」差異在:
+「~」來控制後面所有元件，與「+」只控制後面第一個元件 */
+
+
+/* 使用 ::before 和 ::after 一定要有 content 否則不會發生作用。
+before與 after必須設置的屬性，意思是插入的「內容」，可以是圖片、文字等等，若未填此屬性，偽元素將不會發生任何作用。
+::before 是在原本的元素「之前」加入內容，::after 則是在原本的元素「之後」加入內容，同時偽元素也會「繼承」原本元素的屬性，如果原本文字是黑色，偽元素的文字也會是黑色。
+*/
+
+input.star:checked~label.star:before {
+    content: '\f005';
+    /*實星 fa-star · Unicode: f005 */
+    color: rgb(92, 0, 145);
+    transition: all .5s;
+}
+
+
+/* 選取第五顆星的時候，改變全部星顏色 */
+
+input.star_1-5:checked~label.star:before,
+input.star_2-5:checked~label.star:before,
+input.star_3-5:checked~label.star:before {
+    color: rgb(238, 222, 102);
+    /* text-shadow: 0 0 20px #952; */
+}
+
+
+/* 選取第1顆星 */
+
+input.star_1-1:checked~label.star:before,
+input.star_2-1:checked~label.star:before,
+input.star_3-1:checked~label.star:before {
+    color: rgb(145, 0, 133);
+}
+
+
+/* 選取第2顆星 */
+
+input.star_1-2:checked~label.star:before,
+input.star_2-2:checked~label.star:before,
+input.star_3-2:checked~label.star:before {
+    color: rgb(190, 72, 35);
+}
+
+
+/* 選取第3顆星 */
+
+input.star_1-3:checked~label.star:before,
+input.star_2-3:checked~label.star:before,
+input.star_3-3:checked~label.star:before {
+    color: rgb(141, 120, 120);
+}
+
+
+/* 選取第4顆星 */
+
+input.star_1-4:checked~label.star:before,
+input.star_2-4:checked~label.star:before,
+input.star_3-4:checked~label.star:before {
+    color: rgb(255, 186, 82);
+}
+
+label.star:hover {
+    transform: rotate(-15deg) scale(1.3);
+}
+
+
+/* 星未點擊 */
+
+label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+}
+
+
+/* 評論完成 */
+
+
+/* .stars_avg{
+    display:none;
+} */
+
+.stars_avg:before {
+    display: inline-block;
+    content: '\f005';
+    color: rgb(243, 219, 41);
+    font-family: FontAwesome;
+    font-size: 24px;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+}
+
+.re_stars:before {
+    display: inline-block;
+    position: relative;
+    left: 143px;
+    content: '\f021';
+    color: rgb(41, 105, 243);
+    font-family: FontAwesome;
+    font-size: 24px;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+}
+
+.re_stars:hover {
+    cursor: pointer;
+}
+
+
+/*顯示搜尋字詞和結果數 */
+
+.searches_cat_style {
+    /* display:inline-block; */
+    position: absolute;
+    right: 50%;
+    left: 50%;
+    /* content:'\f021'; */
+    /* color:rgb(41, 105, 243); */
+    /* font-size: 24px; */
+    /* letter-spacing:10px; */
+    /* margin-bottom:10px; */
+}
+
+.Number_of_searches {
+    display: inline-block;
+    position: absolute;
+    right: 50%;
+    left: 50%;
+    /* left:300%; */
+}

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <title>News_Search</title>
+    <!-- <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style> -->
+    <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+
+    <link rel=stylesheet type="text/css" href="./stylesheets/news.css">
+    <link rel=stylesheet type="text/css" href="./stylesheets/viewNews.css">
+    <link rel=stylesheet type="text/css" href="./stylesheets/login.css">
+    <link rel=stylesheet type="text/css" href="./stylesheets/style.css">
+
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400" rel="stylesheet" type="text/css" /> -->
+
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link href="https://cdn.muicss.com/mui-0.9.20/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900">
+
+
+</head>
+
+<body style="background-color: #ddd;">
+    <div id='app'>
+        <div class="sticky-container">
+            <div class="nav-bar">
+                <ul class="nav">
+                    <!-- <a class="brand" href="/">ETSearch</a> -->
+                    <!-- <button v-on:click="greet">Greet</button> -->
+                    <li class='news-image'>
+                        <!-- <img src="./images/News-Mic-iPhone-icon.png" alt="newsICon" width="50" height="50"> -->
+                        <i class="fab fa-neos fa-2x news-icon"></i>
+                    </li>
+
+                    <li><a href="/">首頁</a></li>
+                    <% if (!user) { %>
+
+                        <li><a href="/login">登入</a></li>
+                        <li><a href="/reg">註冊</a></li>
+                        <% } else { %>
+                            <li><a href="/rec">推薦</a></li>
+                            <li><a href="/Info">會員</a></li>
+                            <li><a href="/logout">登出</a></li>
+                            <% } %>
+                                <li v-bind:style="display_searchBar">
+                                    <!-- <input type="text" id="search-bar" placeholder="Type to search"> -->
+                                    <input v-model="searchTerm" type="text" id="search-bar" placeholder="請輸入關鍵字" class="cat_btn_disabled" v-on:keyup.enter="first_TodaySearch_term">
+                                </li>
+
+
+
+                                <span v-bind:style="searches_cat">以下是<span>{{this.newsCat}}</span>類</span>
+
+
+                                <span v-bind:style="Number_of_searches">以下是<span>{{this.newsCat}}</span>類含有<span>{{this.searchTerm}}</span>的搜尋結果，共<span>{{this.numHits}}</span>筆</span>
+                </ul>
+
+                <div class="main-menu">
+
+                    <div class="cat-button">
+                        <!-- click觸發兩個function，active所點擊的類別 -->
+                        <!-- <button type="button" @click="clickOnCat(1,1)">Click Me!</button> -->
+
+                        <button type="button" class="cat_btn_disabled" :class="{ clickActive: isActive==id}" v-for="(cat,id) in all_newsCat" v-if="cat" @click="clickOnCat(id,cat)">
+                            <i class="  fas fa-angle-right"></i>
+
+                            <span>{{cat}}</span>
+
+                        </button>
+                        <!-- <li :class="{ clickActive: isActive==id}" v-for="(cat,id) in all_newsCat" v-if="cat"
+                            @click="clickOnCat(id,cat)">
+                            <i class="  fas fa-angle-right"></i>
+
+                            <span class="nav-text">
+                                {{cat}}
+                            </span>
+
+                        </li> -->
+
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div id="container" class="container">
+            <% if (success) { %>
+                <div class="alert alert-success">
+                    <%= success %>
+                </div>
+                <% } %>
+                    <% if (error) { %>
+                        <div class="alert alert-error">
+                            <%= error %>
+                        </div>
+                        <% } %>
+                            <%- body %>
+                                <hr />
+
+        </div>
+
+</body>
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.min.js"></script>
+<script language=JavaScript src="./javascripts/news.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Vue.component modal -->
+<template id="modal-template">
+    <!-- 把動畫效果套用到<modal></modal -->
+    <transition name="modal">
+        <div class="modal-mask">
+            <div class="modal-wrapper">
+                <div class="modal-container">
+
+                    <div class="modal_header">
+
+                        <slot name="header">
+                            default header
+                            <!-- ${ message } -->
+                        </slot>
+
+                        <button class="modal-close-button " @click="$emit('close')">
+                            <!-- <i>class="fas fa-times"></i> -->
+                            <i>CLOSE</i>
+                        </button>
+                        <hr />
+                    </div>
+                    <div class="modal_body">
+                        <slot name="body">
+                            default body
+                            <!-- {{ message }} -->
+                        </slot>
+                    </div>
+                    <hr />
+                    <div class="modal_keywords" id="modal-keywords">
+                        <slot name="keywords">
+                            <!-- default keywords -->
+                        </slot>
+                        <div class="modal-fre">
+                            <slot name="frequency">
+                                <!-- default frequency -->
+                            </slot>
+                        </div>
+                        <hr />
+                    </div>
+
+                    <slot name="rating">
+
+
+                    </slot>
+
+
+                    <div class="modal_group">
+                        <slot name="group_news">
+
+
+                        </slot>
+
+                    </div>
+
+                    <!-- <div class="modal-footer">
+                        <slot name="footer">
+                            <button class="modal-default-button" @click="$emit('close')"> CLOSE
+
+                            </button>
+                        </slot>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </transition>
+</template>
+
+</html>
